@@ -1,0 +1,35 @@
+<div *ngIf="!registerDone">
+    <app-register></app-register>
+</div>
+
+<div  *ngIf="registerDone" class="desktop">
+  <form #adminForm="ngForm" (ngSubmit)="onLogin(adminForm)">  
+    <div class="cardsize" fxLayout="column" fxLayoutAlign="space-around center" >
+        <mat-form-field class="cardmargin">
+            <input matInput placeholder="Email" ngModel name="email" required type="email" #email="ngModel">
+            <mat-error *ngIf="email.invalid">{{getEmailErrorMessage()}}</mat-error>
+        </mat-form-field>
+       
+        <mat-form-field>
+            <input matInput placeholder="Password" ngModel name="password" required type="password" #password="ngModel">
+            <mat-error *ngIf="password.invalid">Password is required</mat-error>
+        </mat-form-field>
+        
+        <label>Please login with your email and password</label>
+        <mat-error *ngIf="!errorFlag">Incorrect email or password!! Please try again!</mat-error>
+
+        <div>
+            <button type="submit" mat-raised-button color="accent">Login</button> 
+        </div>
+
+        <label class="cardmargin2">Or register to create new account</label>
+        <mat-error *ngIf="!regiFlagStauts">Error occurred! Please try register again with an unused email!</mat-error>
+
+        <div>
+          <button mat-raised-button color="accent" (click)="onRegister()">Register</button>  
+      </div> 
+    </div>    
+  </form>
+</div>  
+
+

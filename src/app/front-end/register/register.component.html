@@ -1,0 +1,73 @@
+
+<mat-vertical-stepper [linear]="isLinear" #stepper>
+  
+        <mat-step [stepControl]="firstFormGroup">
+          <form [formGroup]="firstFormGroup" fxLayout="column" fxLayoutAlign="space-around start">
+            <ng-template matStepLabel>Fill out your email and password for your login</ng-template>
+            <mat-form-field>
+              <input matInput placeholder="Email" formControlName="email" required>
+            </mat-form-field>
+
+            <mat-form-field>
+              <input matInput placeholder="Password" formControlName="password" required>
+            </mat-form-field>
+            <div>
+              <button mat-button matStepperNext>Next</button>
+            </div>
+          </form>
+        </mat-step>
+
+        <mat-step [stepControl]="secondFormGroup">
+          <form [formGroup]="secondFormGroup"  fxLayout="column" fxLayoutAlign="space-around start">
+            <ng-template matStepLabel>Fill out your full name</ng-template>
+            <mat-form-field>
+              <input matInput placeholder="First name" formControlName="firstName" required>
+            </mat-form-field>
+
+            <mat-form-field>
+              <input matInput placeholder="Last name" formControlName="lastName" required>
+            </mat-form-field>
+            <div>
+              <button mat-button matStepperPrevious>Back</button>
+              <button mat-button matStepperNext>Next</button>
+            </div>
+          </form>
+        </mat-step>
+
+        <mat-step [stepControl]="thirdFormGroup">
+          <form [formGroup]="thirdFormGroup"  fxLayout="column" fxLayoutAlign="space-around start">
+            <ng-template matStepLabel>Fill out your job info</ng-template>
+            <mat-form-field>
+              <input matInput placeholder="Title" formControlName="title" required>
+            </mat-form-field>
+
+            <mat-form-field>
+              <input matInput placeholder="Department" formControlName="department" required>
+            </mat-form-field>
+
+            <mat-form-field>
+              <input matInput placeholder="Company" formControlName="company" required>
+            </mat-form-field>
+            <div>
+              <button mat-button matStepperPrevious>Back</button>
+              <button mat-button matStepperNext>Next</button>
+            </div>
+          </form>
+        </mat-step>
+
+        <mat-step>
+          <ng-template matStepLabel>Done</ng-template>
+          You are now done.
+          <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button (click)="stepper.reset()">Reset</button>
+            <button mat-flat-button color="primary" type="submit" 
+                    (click)="register()">Confirm & Submit</button> 
+          </div>
+
+          <div *ngIf="registerDone">
+            <label *ngIf="regiFlag">Register success! Please refresh the browser to go back to login!</label>
+            <mat-error *ngIf="!regiFlag">Sorry,register failed! The email has been used! Please reset register and try another email!</mat-error>
+          </div>
+        </mat-step>
+      </mat-vertical-stepper>

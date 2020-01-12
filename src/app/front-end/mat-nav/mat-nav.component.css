@@ -1,0 +1,26 @@
+.sidenav{
+    width: 200px;
+}
+
+.navgroup{
+        position: absolute;
+        right: 10px;
+}
+
+.navlist{
+    margin: 30px;
+}
+
+.navbutton{
+    margin-left: 30px;
+}
+
+.example-card{
+    margin: 10px;
+    /* margin-right: 10px; */
+    border-width: 2px;
+}
+
+.desktop{
+    background-image: url("/src/assets/desktop.jpeg");
+}

@@ -1,0 +1,99 @@
+<mat-toolbar color = "primary">
+    <button type="button" (click)="drawer.toggle()">
+        <mat-icon >menu</mat-icon>
+    </button>
+    <label><mat-icon>build</mat-icon>Board View Demo</label>
+   
+    <mat-nav-list class="navgroup" *ngIf="userIsAuthenticated">
+        <mat-list-item >            
+            <button class="navbutton" mat-raised-button color="warn" (click)="onLogout()">
+                <mat-icon>power_settings_new</mat-icon> Logout</button>
+        </mat-list-item>
+    </mat-nav-list>   
+</mat-toolbar>
+
+<mat-sidenav-container>
+    <mat-sidenav #drawer class="sidenav" [opened]= 'userIsAuthenticated?"true":"false"' mode="side">
+
+      <mat-toolbar>
+        <mat-card-header>            
+          <div mat-card-avatar>
+            <img mat-card-avatar src="assets/avatar.png" alt="avatar of admin">
+          </div>
+          <mat-card-title>
+            {{adminInfo.firstname}} {{adminInfo.lastname}}
+          </mat-card-title>        
+        </mat-card-header>
+      </mat-toolbar>
+
+      <mat-list>
+        <mat-list-item>Title: {{adminInfo.title}}</mat-list-item>
+        <mat-list-item>Department: {{adminInfo.department}}</mat-list-item>
+        <mat-list-item>Company: <label>{{adminInfo.company}}</label></mat-list-item>      
+      </mat-list>
+    </mat-sidenav>
+           
+    <mat-sidenav-content>
+       <!--Set login page if is not authenticated-->
+     
+          <div *ngIf="!userIsAuthenticated" fxLayout fxLayout.xs="column" fxLayoutAlign="center" >              
+                  <app-login [errorFlag] = "errorStatus"></app-login>               
+          </div>
+              
+      <!--Set content page if is authenticated-->
+   
+          <div *ngIf="userIsAuthenticated">
+              <mat-grid-list cols="3" rowHeight="450px" fxLayoutAlign="space-around" >
+                  <!--Set a card with picture and text-->
+                  <mat-grid-tile [colspan]="1" [rowspan]="1">
+                      <mat-card class="example-card">
+                        
+                        <img mat-card-image src="assets/montreal.jpg" alt="Photo of a Montreal"/>
+
+                        <mat-card-header>            
+                          <mat-card-title>Beautiful City</mat-card-title>
+                          <mat-card-subtitle>Montreal</mat-card-subtitle>
+                      </mat-card-header>
+
+                        <mat-card-content>
+                          <p>
+                           Montreal is a beautiful city with wonderful landscape.
+                          </p>
+                       </mat-card-content>
+
+                       <mat-card-footer fxLayout="row" fxLayoutAlign="space-around center">
+                          <p>Edited by {{adminInfo.firstname}}</p>
+                       </mat-card-footer>
+
+                      </mat-card>
+                   </mat-grid-tile>
+      
+                   <!--Set a card with piechart -->
+                   <mat-grid-tile>
+                      <app-d3-piechart [datapie]="chartData"></app-d3-piechart>
+                   </mat-grid-tile>
+      
+                   <!--Set a card with scatterchart -->
+                   <mat-grid-tile>
+                      <app-d3-scatterchart [datascatter]="chartData"></app-d3-scatterchart>
+                  </mat-grid-tile>
+      
+              </mat-grid-list>
+      
+              <mat-grid-list cols="2" rowHeight="500px">
+                <!--Set a barchart-->
+                <mat-grid-tile>
+                    <app-d3-barchart [dataset] = "chartData"></app-d3-barchart>
+                </mat-grid-tile>
+      
+                <!--Set a mat table-->
+                <mat-grid-tile>
+                  <app-table></app-table>
+                </mat-grid-tile>
+      
+              </mat-grid-list>
+          </div>
+       
+    </mat-sidenav-content>>
+</mat-sidenav-container>
+
