@@ -8,6 +8,9 @@ This project is a full stack web application done by MEAN and could be running a
   
 Frontend by Angular8, Backdend by Express and Node.js, database resource is MongoDB.Atlas.
 
+The project has been deployed on AWS and could be visited by the linkage:
+http://boardview.s3-website.us-east-2.amazonaws.com
+
 ## How to run the application
 
 1. Download the project and unpack it.
